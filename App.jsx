@@ -2,6 +2,16 @@ import { useState } from "react"
 import { clsx } from "clsx"
 import { languages } from "./languages"
 
+/**
+ * Backlog:
+ * 
+ * - Farewell messages in status section
+ * - Fix a11y issues
+ * - Make the new game button work
+ * - Choose a random word from a list of words
+ * - Confetti drop when the user wins
+ */
+
 export default function AssemblyEndgame() {
     // State values
     const [currentWord, setCurrentWord] = useState("react")
