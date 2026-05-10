@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { clsx } from "clsx"
 import { languages } from "./languages"
-import { getFarewellText } from "./utils"
+import { getFarewellText, getRandomWord } from "./utils"
 
 /**
  * Backlog:
@@ -9,16 +9,21 @@ import { getFarewellText } from "./utils"
  * ✅ Farewell messages in status section
  * ✅ Disable the keyboard when the game is over
  * ✅ Fix a11y issues
- * - Choose a random word from a list of words
+ * ✅ Choose a random word from a list of words
  * - Make the New Game button reset the game
  * - Confetti drop when the user wins
  * 
- * Challenge: Disable the keyboard when the game is over
+ * Challenge: Choose a random word from a list of words
+ * 
+ * 1. Create a new function in utils.js that chooses a random
+ *    word from the imported array of words and returns it
+ * 2. import the function into this file
+ * 3. Figure out where to use that function.
  */
 
 export default function AssemblyEndgame() {
     // State values
-    const [currentWord, setCurrentWord] = useState("react")
+    const [currentWord, setCurrentWord] = useState(() => getRandomWord())
     const [guessedLetters, setGuessedLetters] = useState([])
 
     // Derived values
