@@ -4,14 +4,16 @@ import { languages } from "./languages"
 import { getFarewellText } from "./utils"
 
 /**
- * Challenge: Bid farewell to each programming language
- * as it gets erased from existance 👋😭
+ * Backlog:
  * 
- * Use the `getFarewellText` function from the new utils.js
- * file to generate the text.
+ * ✅ Farewell messages in status section
+ * ✅ Disable the keyboard when the game is over
+ * - Fix a11y issues
+ * - Make the New Game button reset the game
+ * - Choose a random word from a list of words
+ * - Confetti drop when the user wins
  * 
- * Check hint.md if you're feeling stuck, but do your best
- * to solve the challenge without the hint! 🕵️
+ * Challenge: Disable the keyboard when the game is over
  */
 
 export default function AssemblyEndgame() {
@@ -77,6 +79,7 @@ export default function AssemblyEndgame() {
             <button
                 className={className}
                 key={letter}
+                disabled={isGameOver}
                 onClick={() => addGuessedLetter(letter)}
             >
                 {letter.toUpperCase()}
