@@ -5,12 +5,8 @@ import { languages } from "./languages"
 /**
  * Goal: Allow the user to start guessing the letters
  * 
- * Challenge: Update the keyboard when a letter is right
- * or wrong.
- * 
- * Bonus: use the `clsx` package to easily add conditional 
- * classNames to the keys of the keyboard. Check the docs 
- * to learn how to use it 📖
+ * Challenge: Only display the correctly-guessed letters
+ * in the word
  */
 
 export default function AssemblyEndgame() {
@@ -44,7 +40,9 @@ export default function AssemblyEndgame() {
     })
 
     const letterElements = currentWord.split("").map((letter, index) => (
-        <span key={index}>{letter.toUpperCase()}</span>
+        <span key={index}>
+            {guessedLetters.includes(letter) ? letter.toUpperCase() : ""}
+        </span>
     ))
 
     const keyboardElements = alphabet.split("").map(letter => {
@@ -55,8 +53,6 @@ export default function AssemblyEndgame() {
             correct: isCorrect,
             wrong: isWrong
         })
-        
-        console.log(className)
         
         return (
             <button
