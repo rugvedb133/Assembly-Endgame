@@ -4,32 +4,18 @@ import { languages } from "./languages"
 import { getFarewellText, getRandomWord } from "./utils"
 import Confetti from "react-confetti"
 
-/**
- * Backlog:
- * 
- * ✅ Farewell messages in status section
- * ✅ Disable the keyboard when the game is over
- * ✅ Fix a11y issues
- * ✅ Choose a random word from a list of words
- * ✅ Make the New Game button reset the game
- * ✅ Reveal what the word was if the user loses the game
- * ✅ Confetti drop when the user wins
- * 
- * Challenge: 🎊🎊🎊🎊🎊
- */
-
 export default function AssemblyEndgame() {
     // State values
     const [currentWord, setCurrentWord] = useState(() => getRandomWord())
     const [guessedLetters, setGuessedLetters] = useState([])
 
     // Derived values
-    const numGuessesLeft = languages.length - 1
+    const numGuesses = languages.length - 1
     const wrongGuessCount =
         guessedLetters.filter(letter => !currentWord.includes(letter)).length
     const isGameWon =
         currentWord.split("").every(letter => guessedLetters.includes(letter))
-    const isGameLost = wrongGuessCount >= numGuessesLeft
+    const isGameLost = wrongGuessCount >= numGuesses
     const isGameOver = isGameWon || isGameLost
     const lastGuessedLetter = guessedLetters[guessedLetters.length - 1]
     const isLastGuessIncorrect = lastGuessedLetter && !currentWord.includes(lastGuessedLetter)
@@ -144,13 +130,12 @@ export default function AssemblyEndgame() {
                 isGameWon && 
                     <Confetti
                         recycle={false}
-                        numberOfPieces={1000}
+                        numberOfPieces={2000}
                     />
             }
             <header>
                 <h1>Assembly: Endgame</h1>
-                <p>Guess the word within 8 attempts to keep the
-                programming world safe from Assembly!</p>
+                <p>Guess the word within 8 attempts to keep the programming world safe from Assembly!</p>
             </header>
 
             <section
@@ -180,12 +165,12 @@ export default function AssemblyEndgame() {
                         `Correct! The letter ${lastGuessedLetter} is in the word.` :
                         `Sorry, the letter ${lastGuessedLetter} is not in the word.`
                     }
-                    You have {numGuessesLeft} attempts left.
+                    You have {numGuesses - wrongGuessCount} attempts left.
                 </p>
                 <p>Current word: {currentWord.split("").map(letter =>
                     guessedLetters.includes(letter) ? letter + "." : "blank.")
-                    .join(" ")}</p>
-
+                    .join(" ")}
+                </p>
             </section>
 
             <section className="keyboard">
@@ -196,7 +181,9 @@ export default function AssemblyEndgame() {
                 <button
                     className="new-game"
                     onClick={startNewGame}
-                >New Game</button>}
+                >
+                    New Game
+                </button>}
         </main>
     )
 }
