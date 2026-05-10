@@ -20,11 +20,11 @@ export default function AssemblyEndgame() {
     const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
     function addGuessedLetter(letter) {
-        setGuessedLetters(prevLetters => {
-            const lettersSet = new Set(prevLetters)
-            lettersSet.add(letter)
-            return Array.from(lettersSet)
-        })
+        setGuessedLetters(prevLetters => 
+            prevLetters.includes(letter) ? 
+                prevLetters : 
+                [...prevLetters, letter]
+        )
     }
 
     const languageElements = languages.map(lang => {
